@@ -1,0 +1,154 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.header h1 {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #7f8c8d;
+    margin-bottom: 0;
+}
+
+/* Student Info - Top Right */
+.student-info {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-align: right;
+    background: rgba(248, 249, 250, 0.9);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.student-info h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.student-info p {
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* Card */
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+}
+
+.card-header h3 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* Student List */
+.student-item {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.student-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+}
+
+.student-slot {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.student-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.student-reg {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.empty-slot {
+    background: #e9ecef;
+    color: #6c757d;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+/* Buttons - Both Same Style and Visible */
+.button-group {
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    min-width: 150px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .student-info {
+        position: static;
+        text-align: center;
+        margin-top: 1rem;
+        display: inline-block;
+    }
+    
+    .button-group .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+        margin-right: 0 !important;
+    }
+    
+    .button-group .btn:last-child {
+        margin-bottom: 0;
+    }
+}

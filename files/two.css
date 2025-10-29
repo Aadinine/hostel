@@ -1,0 +1,161 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #7f8c8d;
+    margin-bottom: 0;
+}
+
+/* Back Button */
+.back-btn {
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    border-width: 2px;
+}
+
+.back-btn:hover {
+    background-color: #667eea;
+    border-color: #667eea;
+    color: white;
+}
+
+/* Student Info */
+.student-info h5 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.student-info p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Room Card */
+.room-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+}
+
+.room-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.room-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.room-status {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Student Slots */
+.student-slots {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.slot {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.slot-available {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.slot-occupied {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+.slot-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.slot-icon {
+    font-size: 1.2rem;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    padding: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header .row {
+        text-align: center;
+    }
+    
+    .student-info {
+        margin-top: 1rem;
+    }
+    
+    .back-btn {
+        width: 100%;
+    }
+}
+
+/* Full Room Styles */
+.room-card.full-room {
+    background: #f8d7da;
+    border: 2px solid #f5c6cb;
+}
+
+.room-card.full-room .room-header {
+    border-bottom: 2px solid #f1b0b7;
+}
+
+.room-card.full-room .room-number {
+    color: #721c24;
+}
+
+.room-card.full-room .room-status {
+    color: #856404;
+    font-weight: bold;
+}

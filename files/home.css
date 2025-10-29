@@ -1,0 +1,117 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Welcome Banner */
+.welcome-banner {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-banner h1 {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.banner-subtitle {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+}
+
+.card-header h3 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* Room Type Cards */
+.room-type-card {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.room-type-card:hover {
+    transform: translateY(-5px);
+    border-color: #667eea;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.room-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.room-type-card h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+/* Logout Button */
+.btn-outline-danger {
+    border-radius: 25px;
+    padding: 0.5rem 2rem;
+    font-weight: 600;
+}
+
+/* Leave Room Button */
+.btn-leave {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-leave:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+    background: linear-gradient(135deg, #c82333 0%, #dc3545 100%);
+}
+
+/* Current Booking Info */
+.current-booking {
+    background: #d1ecf1;
+    border: 2px solid #bee5eb;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.booking-header {
+    font-weight: 700;
+    color: #0c5460;
+    margin-bottom: 0.5rem;
+}
+
+.booking-details {
+    color: #0c5460;
+    margin-bottom: 0.25rem;
+}
