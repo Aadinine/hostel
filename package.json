@@ -1,0 +1,12 @@
+{
+  "name": "hostel-room-allocation",
+  "version": "1.0.0",
+  "main": "nodefile.js",
+  "scripts": {
+    "start": "node nodefile.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0"
+  }
+}
