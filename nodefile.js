@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
@@ -8,8 +9,16 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static('files'));
 
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/files/main.html');
+});
+
+
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/hostel')
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hostel';
+
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -62,7 +71,7 @@ app.post('/login', async (req, res) => {
   console.log('STEP 6: Login request completed');
 });
 
-// Add this route to your nodefile.js
+
 app.get('/one_seater_rooms', async (req, res) => {
   try {
     const rooms = await mongoose.connection.db.collection('one_seater_rooms').find().toArray();
@@ -71,8 +80,7 @@ app.get('/one_seater_rooms', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-// Add this route to get room details
-// Room details route - with underscore
+// Room details route 
 app.get('/room_details_one', async (req, res) => {
   try {
     const roomNumber = parseInt(req.query.room);
@@ -86,8 +94,7 @@ app.get('/room_details_one', async (req, res) => {
   }
 });
 
-// Book room route - with underscore
-// Book room route - with underscore
+// Book room route 
 app.post('/book_room_one', async (req, res) => {
   const { roomNumber, slot, student } = req.body;
   
@@ -101,7 +108,7 @@ app.post('/book_room_one', async (req, res) => {
     });
     
     if (existingBooking) {
-      console.log(`❌ Student ${student.regno} already has a booking`);
+      console.log(`Student ${student.regno} already has a booking`);
       return res.json({ 
         success: false, 
         message: 'This user has already booked a room previously.' 
@@ -124,7 +131,7 @@ app.post('/book_room_one', async (req, res) => {
       }
     );
     
-    console.log(`📊 MongoDB result:`, result);
+    console.log(`MongoDB result:`, result);
     
     if (result.modifiedCount === 1) {
       // 3. Add to occupied collection to prevent multiple bookings
@@ -135,20 +142,20 @@ app.post('/book_room_one', async (req, res) => {
 
       });
       
-      console.log(`✅ Room ${roomNumber} booked successfully for ${student.name}`);
+      console.log(`Room ${roomNumber} booked successfully for ${student.name}`);
       res.json({ 
         success: true, 
         message: 'Room booked successfully!' 
       });
     } else {
-      console.log(`❌ Booking failed - Room ${roomNumber} might be full or doesn't exist`);
+      console.log(`Booking failed - Room ${roomNumber} might be full or doesn't exist`);
       res.json({ 
         success: false, 
         message: 'Room is full or booking failed. Please try another room.' 
       });
     }
   } catch (error) {
-    console.log('💥 Booking error:', error);
+    console.log('Booking error:', error);
     res.json({ 
       success: false, 
       message: 'Server error during booking' 
@@ -159,7 +166,6 @@ app.post('/book_room_one', async (req, res) => {
 
 
 
-// Add this route to your nodefile.js
 app.get('/two_seater_rooms', async (req, res) => {
   try {
     const rooms = await mongoose.connection.db.collection('two_seater_rooms').find().toArray();
@@ -168,8 +174,7 @@ app.get('/two_seater_rooms', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-// Add this route to get room details
-// Room details route - with underscore
+// Room details route 
 app.get('/room_details_two', async (req, res) => {
   try {
     const roomNumber = parseInt(req.query.room);
@@ -184,12 +189,11 @@ app.get('/room_details_two', async (req, res) => {
 });
 
 // Book room route - with underscore
-// Book room route - with underscore
 app.post('/book_room_two', async (req, res) => {
   const { roomNumber, slot, student } = req.body;
   
-  console.log(`📝 Booking request: Room ${roomNumber}, Slot ${slot}`);
-  console.log(`👤 Student: ${student.name} (${student.regno})`);
+  console.log(`Booking request: Room ${roomNumber}, Slot ${slot}`);
+  console.log(`Student: ${student.name} (${student.regno})`);
   
   try {
     // 1. Check if student already booked any room in occupied collection
@@ -198,7 +202,7 @@ app.post('/book_room_two', async (req, res) => {
     });
     
     if (existingBooking) {
-      console.log(`❌ Student ${student.regno} already has a booking`);
+      console.log(`Student ${student.regno} already has a booking`);
       return res.json({ 
         success: false, 
         message: 'This user has already booked a room previously.' 
@@ -221,7 +225,7 @@ app.post('/book_room_two', async (req, res) => {
       }
     );
     
-    console.log(`📊 MongoDB result:`, result);
+    console.log(`MongoDB result:`, result);
     
     if (result.modifiedCount === 1) {
       // 3. Add to occupied collection to prevent multiple bookings
@@ -232,20 +236,20 @@ app.post('/book_room_two', async (req, res) => {
 
       });
       
-      console.log(`✅ Room ${roomNumber} booked successfully for ${student.name}`);
+      console.log(`Room ${roomNumber} booked successfully for ${student.name}`);
       res.json({ 
         success: true, 
         message: 'Room booked successfully!' 
       });
     } else {
-      console.log(`❌ Booking failed - Room ${roomNumber} might be full or doesn't exist`);
+      console.log(`Booking failed - Room ${roomNumber} might be full or doesn't exist`);
       res.json({ 
         success: false, 
         message: 'Room is full or booking failed. Please try another room.' 
       });
     }
   } catch (error) {
-    console.log('💥 Booking error:', error);
+    console.log('Booking error:', error);
     res.json({ 
       success: false, 
       message: 'Server error during booking' 
@@ -255,7 +259,7 @@ app.post('/book_room_two', async (req, res) => {
 
 
 
-// Add this route to your nodefile.js
+
 app.get('/three_seater_rooms', async (req, res) => {
   try {
     const rooms = await mongoose.connection.db.collection('three_seater_rooms').find().toArray();
@@ -264,8 +268,8 @@ app.get('/three_seater_rooms', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-// Add this route to get room details
-// Room details route - with underscore
+
+
 app.get('/room_details_three', async (req, res) => {
   try {
     const roomNumber = parseInt(req.query.room);
@@ -279,13 +283,12 @@ app.get('/room_details_three', async (req, res) => {
   }
 });
 
-// Book room route - with underscore
-// Book room route - with underscore
+
 app.post('/book_room_three', async (req, res) => {
   const { roomNumber, slot, student } = req.body;
   
-  console.log(`📝 Booking request: Room ${roomNumber}, Slot ${slot}`);
-  console.log(`👤 Student: ${student.name} (${student.regno})`);
+  console.log(`Booking request: Room ${roomNumber}, Slot ${slot}`);
+  console.log(`Student: ${student.name} (${student.regno})`);
   
   try {
     // 1. Check if student already booked any room in occupied collection
@@ -294,7 +297,7 @@ app.post('/book_room_three', async (req, res) => {
     });
     
     if (existingBooking) {
-      console.log(`❌ Student ${student.regno} already has a booking`);
+      console.log(`Student ${student.regno} already has a booking`);
       return res.json({ 
         success: false, 
         message: 'This user has already booked a room previously.' 
@@ -328,20 +331,20 @@ app.post('/book_room_three', async (req, res) => {
 
       });
       
-      console.log(`✅ Room ${roomNumber} booked successfully for ${student.name}`);
+      console.log(`Room ${roomNumber} booked successfully for ${student.name}`);
       res.json({ 
         success: true, 
         message: 'Room booked successfully!' 
       });
     } else {
-      console.log(`❌ Booking failed - Room ${roomNumber} might be full or doesn't exist`);
+      console.log(`Booking failed - Room ${roomNumber} might be full or doesn't exist`);
       res.json({ 
         success: false, 
         message: 'Room is full or booking failed. Please try another room.' 
       });
     }
   } catch (error) {
-    console.log('💥 Booking error:', error);
+    console.log('Booking error:', error);
     res.json({ 
       success: false, 
       message: 'Server error during booking' 
@@ -355,7 +358,7 @@ app.post('/book_room_three', async (req, res) => {
 
 
 
-// Add this route to your nodefile.js
+
 app.get('/four_seater_rooms', async (req, res) => {
   try {
     const rooms = await mongoose.connection.db.collection('four_seater_rooms').find().toArray();
@@ -364,8 +367,8 @@ app.get('/four_seater_rooms', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-// Add this route to get room details
-// Room details route - with underscore
+
+
 app.get('/room_details_four', async (req, res) => {
   try {
     const roomNumber = parseInt(req.query.room);
@@ -379,13 +382,12 @@ app.get('/room_details_four', async (req, res) => {
   }
 });
 
-// Book room route - with underscore
-// Book room route - with underscore
+
 app.post('/book_room_four', async (req, res) => {
   const { roomNumber, slot, student } = req.body;
   
-  console.log(`📝 Booking request: Room ${roomNumber}, Slot ${slot}`);
-  console.log(`👤 Student: ${student.name} (${student.regno})`);
+  console.log(`Booking request: Room ${roomNumber}, Slot ${slot}`);
+  console.log(`Student: ${student.name} (${student.regno})`);
   
   try {
     // 1. Check if student already booked any room in occupied collection
@@ -394,7 +396,7 @@ app.post('/book_room_four', async (req, res) => {
     });
     
     if (existingBooking) {
-      console.log(`❌ Student ${student.regno} already has a booking`);
+      console.log(`Student ${student.regno} already has a booking`);
       return res.json({ 
         success: false, 
         message: 'This user has already booked a room previously.' 
@@ -417,7 +419,7 @@ app.post('/book_room_four', async (req, res) => {
       }
     );
     
-    console.log(`📊 MongoDB result:`, result);
+    console.log(`MongoDB result:`, result);
     
     if (result.modifiedCount === 1) {
       // 3. Add to occupied collection to prevent multiple bookings
@@ -428,20 +430,20 @@ app.post('/book_room_four', async (req, res) => {
 
       });
       
-      console.log(`✅ Room ${roomNumber} booked successfully for ${student.name}`);
+      console.log(`Room ${roomNumber} booked successfully for ${student.name}`);
       res.json({ 
         success: true, 
         message: 'Room booked successfully!' 
       });
     } else {
-      console.log(`❌ Booking failed - Room ${roomNumber} might be full or doesn't exist`);
+      console.log(`Booking failed - Room ${roomNumber} might be full or doesn't exist`);
       res.json({ 
         success: false, 
         message: 'Room is full or booking failed. Please try another room.' 
       });
     }
   } catch (error) {
-    console.log('💥 Booking error:', error);
+    console.log('Booking error:', error);
     res.json({ 
       success: false, 
       message: 'Server error during booking' 
@@ -453,11 +455,11 @@ app.post('/book_room_four', async (req, res) => {
 
 
 
-// Leave room route - SAFE VERSION (handles different room types)
+// Leave room route
 app.post('/leave_room', async (req, res) => {
   const { regno, name } = req.body;
   
-  console.log(`🚪 Leave room request from: ${name} (${regno})`);
+  console.log(`Leave room request from: ${name} (${regno})`);
   
   try {
     // STEP 1: FIRST remove from occupied collection
@@ -466,7 +468,7 @@ app.post('/leave_room', async (req, res) => {
     });
     
     if (!occupiedBooking) {
-      console.log(`❌ No booking found in occupied collection for: ${regno}`);
+      console.log(`No booking found in occupied collection for: ${regno}`);
       return res.json({ 
         success: false, 
         message: 'No room booking found for this user.' 
@@ -474,7 +476,7 @@ app.post('/leave_room', async (req, res) => {
     }
     
     const roomNumberFromOccupied = occupiedBooking.roomnum;
-    console.log(`✅ Removed from occupied collection - Room: ${roomNumberFromOccupied}`);
+    console.log(`Removed from occupied collection - Room: ${roomNumberFromOccupied}`);
     
     // STEP 2: THEN remove from ALL room collections by regno
     const collections = [
@@ -498,7 +500,7 @@ app.post('/leave_room', async (req, res) => {
       });
       
       if (room) {
-        console.log(`🔍 Found student in ${collName}, Room: ${room.roomnum}`);
+        console.log(`Found student in ${collName}, Room: ${room.roomnum}`);
         
         // Clear the student from all possible slots - SAFE CHECK
         const updateFields = {};
@@ -514,7 +516,7 @@ app.post('/leave_room', async (req, res) => {
             { roomnum: room.roomnum },
             { $set: updateFields }
           );
-          console.log(`✅ Removed from ${collName}, Room ${room.roomnum}`);
+          console.log(`Removed from ${collName}, Room ${room.roomnum}`);
           removedFromRoom = true;
           // Found and removed from one room, no need to check other collections
           break;
@@ -523,13 +525,13 @@ app.post('/leave_room', async (req, res) => {
     }
     
     if (removedFromRoom) {
-      console.log(`✅ Successfully removed ${name} from ALL collections`);
+      console.log(`Successfully removed ${name} from ALL collections`);
       res.json({ 
         success: true, 
         message: 'Successfully left the room!' 
       });
     } else {
-      console.log(`⚠️ Removed from occupied but not found in any room collection`);
+      console.log(`Removed from occupied but not found in any room collection`);
       res.json({ 
         success: true, 
         message: 'Successfully left the room! (Cleaned up booking record)' 
@@ -537,7 +539,7 @@ app.post('/leave_room', async (req, res) => {
     }
     
   } catch (error) {
-    console.log('💥 Error leaving room:', error);
+    console.log('Error leaving room:', error);
     res.json({ 
       success: false, 
       message: 'Server error while leaving room' 
@@ -548,7 +550,7 @@ app.post('/leave_room', async (req, res) => {
 app.get('/check_booking', async (req, res) => {
   const regno = req.query.regno;
   
-  console.log(`🔍 Checking booking for: ${regno}`);
+  console.log(`Checking booking for: ${regno}`);
   
   try {
     // Just check the occupied collection (fastest check)
@@ -557,22 +559,21 @@ app.get('/check_booking', async (req, res) => {
     });
     
     if (booking) {
-      console.log(`✅ Booking found for: ${regno}`);
+      console.log(`Booking found for: ${regno}`);
       res.json({ hasBooking: true });
     } else {
-      console.log(`❌ No booking found for: ${regno}`);
+      console.log(`No booking found for: ${regno}`);
       res.json({ hasBooking: false });
     }
     
   } catch (error) {
-    console.log('💥 Error checking booking:', error);
+    console.log('Error checking booking:', error);
     res.json({ hasBooking: false });
   }
 });
-// Check if user already has a booking
-// Check if user already has a booking
-// Check if user already has a booking - searches ALL room collections
-// Check if user already has a booking - simplified version
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running: http://localhost:${PORT}`);
