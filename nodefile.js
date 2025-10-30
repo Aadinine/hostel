@@ -24,7 +24,7 @@ mongoose.connect(MONGODB_URI)
   })
   .catch((error) => {
     console.log('MongoDB connection failed');
-    onselect.log(error)
+    console.log(error)
   });
 
 app.get('/students', async (req, res) => {
