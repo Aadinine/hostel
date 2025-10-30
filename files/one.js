@@ -27,7 +27,7 @@ function loadStudentInfo() {
     if (studentReg) {
         document.getElementById('studentReg').textContent = studentReg;
     } else {
-        // If reg number not stored, you might want to get it from somewhere else
+        // If reg number not stored
         document.getElementById('studentReg').textContent = 'Registration Number';
     }
 }

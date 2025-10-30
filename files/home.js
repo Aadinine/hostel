@@ -1,4 +1,3 @@
-// home.js - COMPLETE VERSION
 document.addEventListener('DOMContentLoaded', function() {
     // Get student name from localStorage
     const studentName = localStorage.getItem('studentName');
@@ -41,7 +40,6 @@ async function checkCurrentBooking() {
     if (!studentReg) return;
     
     try {
-        // FIXED URL: Added the missing ?
         const response = await fetch(`http://localhost:3000/check_booking?regno=${studentReg}`);
         
         if (!response.ok) {

@@ -44,7 +44,7 @@ async function loadRoomDetails() {
     document.getElementById('roomNumber').textContent = `Room ${roomNumber}`;
     
     try {
-        // Fetch room details from server - FIXED ROUTE NAME
+        // Fetch room details from server
         const response = await fetch(`http://localhost:3000/room_details_two?room=${roomNumber}`);
         const room = await response.json();
         
@@ -59,7 +59,7 @@ async function loadRoomDetails() {
     }
 }
 
-// Display students in the room - FIXED NULL CHECK
+// Display students in the room
 function displayStudents(room) {
     const studentsList = document.getElementById('studentsList');
     
@@ -101,7 +101,7 @@ function createStudentHTML(slot, studentData) {
     `;
 }
 
-// Select room function - Books the room for current student - REMOVED DUPLICATE
+// Select room function - Books the room for current student
 async function selectRoom() {
     const urlParams = new URLSearchParams(window.location.search);
     const roomNumber = parseInt(urlParams.get('room'));
@@ -130,9 +130,8 @@ async function selectRoom() {
             return;
         }
 
-        // Book the room by updating the available slot - FIXED ROUTE NAME
-// Book the room by updating the available slot
-        const bookResponse = await fetch('http://localhost:3000/book_room_two', {  // ← Make sure it's book-room
+        // Book the room by updating the available slot
+        const bookResponse = await fetch('http://localhost:3000/book_room_two', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

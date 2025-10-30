@@ -59,7 +59,7 @@ async function loadRoomDetails() {
     }
 }
 
-// Display students in the room - FIXED NULL CHECK
+// Display students in the room
 function displayStudents(room) {
     const studentsList = document.getElementById('studentsList');
     
@@ -103,7 +103,7 @@ function createStudentHTML(slot, studentData) {
     `;
 }
 
-// Select room function - Books the room for current student - REMOVED DUPLICATE
+// Select room function - Books the room for current student
 async function selectRoom() {
     const urlParams = new URLSearchParams(window.location.search);
     const roomNumber = parseInt(urlParams.get('room'));
@@ -117,11 +117,11 @@ async function selectRoom() {
     }
 
     try {
-        // First, get the current room details to find available slot
+        // get the current room details to find available slot
         const response = await fetch(`http://localhost:3000/room_details_three?room=${roomNumber}`);
         const room = await response.json();
 
-        // Find first available slot (null value)
+        // Find first available slot
         let availableSlot = null;
         if (room.st1 === null) availableSlot = 'st1';
         else if (room.st2 === null) availableSlot = 'st2';
@@ -132,9 +132,9 @@ async function selectRoom() {
             return;
         }
 
-        // Book the room by updating the available slot - FIXED ROUTE NAME
-// Book the room by updating the available slot
-        const bookResponse = await fetch('http://localhost:3000/book_room_three', {  // ← Make sure it's book-room
+        // Book the room by updating the available slot 
+
+        const bookResponse = await fetch('http://localhost:3000/book_room_three', {  
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
