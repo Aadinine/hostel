@@ -99,8 +99,8 @@ app.get('/room_details_one', async (req, res) => {
 app.post('/book_room_one', async (req, res) => {
   const { roomNumber, slot, student } = req.body;
   
-  console.log(`📝 Booking request: Room ${roomNumber}, Slot ${slot}`);
-  console.log(`👤 Student: ${student.name} (${student.regno})`);
+  console.log(`Booking request: Room ${roomNumber}, Slot ${slot}`);
+  console.log(`Student: ${student.name} (${student.regno})`);
   
   try {
     // 1. Check if student already booked any room in occupied collection
@@ -321,7 +321,7 @@ app.post('/book_room_three', async (req, res) => {
       }
     );
     
-    console.log(`📊 MongoDB result:`, result);
+    console.log(`MongoDB result:`, result);
     
     if (result.modifiedCount === 1) {
       // 3. Add to occupied collection to prevent multiple bookings
